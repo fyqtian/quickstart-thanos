@@ -273,7 +273,8 @@ services:
         restart: always
 
     minio:
-        image: minio/minio:RELEASE.2020-05-01T22-19-14Z
+#        image: minio/minio:RELEASE.2020-05-01T22-19-14Z
+        image: bitnami/minio
         volumes:
             - minio_data:/data
         entrypoint: sh
@@ -312,6 +313,7 @@ services:
             - '--storage.path=/alertmanager'
 
     cadvisor:
+#        image: google/cadvisor:v0.33.0
         image: gcr.io/google_containers/cadvisor:v0.36.0
         volumes:
             - /:/rootfs:ro
