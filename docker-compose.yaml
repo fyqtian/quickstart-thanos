@@ -18,11 +18,12 @@ services:
         command:
             - '--config.file=/etc/prometheus/prometheus1.yaml'
             - '--storage.tsdb.path=/prometheus'
-            - '--storage.tsdb.max-block-duration=30m'
-            - '--storage.tsdb.min-block-duration=30m'
+            - '--storage.tsdb.max-block-duration=5m'
+            - '--storage.tsdb.min-block-duration=5m'
             - '--web.enable-lifecycle'
             - '--web.console.libraries=/usr/share/prometheus/console_libraries'
             - '--web.console.templates=/usr/share/prometheus/consoles'
+            - '--storage.tsdb.retention.time=300s'
         ports:
             - 9081:9090
         links:
@@ -40,11 +41,12 @@ services:
         command:
             - '--config.file=/etc/prometheus/prometheus2.yaml'
             - '--storage.tsdb.path=/prometheus'
-            - '--storage.tsdb.max-block-duration=30m'
-            - '--storage.tsdb.min-block-duration=30m'
+            - '--storage.tsdb.max-block-duration=5m'
+            - '--storage.tsdb.min-block-duration=5m'
             - '--web.enable-lifecycle'
             - '--web.console.libraries=/usr/share/prometheus/console_libraries'
             - '--web.console.templates=/usr/share/prometheus/consoles'
+            - '--storage.tsdb.retention.time=300s'
         ports:
             - 9082:9090
         links:
@@ -62,11 +64,13 @@ services:
         command:
             - '--config.file=/etc/prometheus/prometheus3.yaml'
             - '--storage.tsdb.path=/prometheus'
-            - '--storage.tsdb.max-block-duration=30m'
-            - '--storage.tsdb.min-block-duration=30m'
+            - '--storage.tsdb.max-block-duration=5m'
+            - '--storage.tsdb.min-block-duration=5m'
             - '--web.enable-lifecycle'
             - '--web.console.libraries=/usr/share/prometheus/console_libraries'
             - '--web.console.templates=/usr/share/prometheus/consoles'
+            - '--storage.tsdb.retention.time=300s'
+
         ports:
             - 9083:9090
         links:
@@ -84,11 +88,12 @@ services:
         command:
             - '--config.file=/etc/prometheus/prometheus4.yaml'
             - '--storage.tsdb.path=/prometheus'
-            - '--storage.tsdb.max-block-duration=30m'
-            - '--storage.tsdb.min-block-duration=30m'
+            - '--storage.tsdb.max-block-duration=5m'
+            - '--storage.tsdb.min-block-duration=5m'
             - '--web.enable-lifecycle'
             - '--web.console.libraries=/usr/share/prometheus/console_libraries'
             - '--web.console.templates=/usr/share/prometheus/consoles'
+            - '--storage.tsdb.retention.time=300s'
         ports:
             - 9084:9090
         links:
@@ -185,10 +190,6 @@ services:
             - '--grpc-address=0.0.0.0:10091'
             - '--http-address=0.0.0.0:10902'
             - '--query.replica-label=replica'
-            - '--store=thanos-sidecar-1:10091'
-            - '--store=thanos-sidecar-2:10091'
-            - '--store=thanos-sidecar-3:10091'
-            - '--store=thanos-sidecar-4:10091'
             - '--store=thanos-store-gateway:10091'
             - '--store=thanos-ruler:10091'
         ports:
@@ -199,7 +200,10 @@ services:
             - thanos-sidecar-3
             - thanos-sidecar-4
         restart: always
-
+    #            - '--store=thanos-sidecar-1:10091'
+    #            - '--store=thanos-sidecar-2:10091'
+    #            - '--store=thanos-sidecar-3:10091'
+    #            - '--store=thanos-sidecar-4:10091'
     thanos-store-gateway:
         image: quay.io/thanos/thanos:v0.31.0
         volumes:
