@@ -343,3 +343,11 @@ services:
         env_file:
             - ./grafana/config.monitoring
         restart: always
+
+    grpcurl:
+        image: grpcurl:v0.0.1
+        user: root
+        entrypoint: "sleep 90000000"
+#        command:
+#            - 'sleep 9999999999'
+        restart: always
