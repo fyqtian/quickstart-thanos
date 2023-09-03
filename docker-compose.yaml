@@ -217,7 +217,7 @@ services:
         depends_on:
             - minio
         ports:
-            - 20901:10901
+            - 20091:10091
             - 20902:10902
         restart: always
 
