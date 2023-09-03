@@ -216,6 +216,9 @@ services:
             - '--objstore.config-file=/etc/thanos/bucket_config.yaml'
         depends_on:
             - minio
+        ports:
+            - 20901:10901
+            - 20902:10902
         restart: always
 
     thanos-compactor:
